@@ -11,11 +11,12 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView 
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-import Icon from "react-native-vector-icons/FontAwesome";
-import { FontAwesome } from "@expo/vector-icons";
+
+import axios from 'axios'
+axios.defaults.baseURL='http://localhost:3000/'
 
 const AddReview = () => {
   const navigation = useNavigation();
@@ -27,6 +28,8 @@ const AddReview = () => {
   });
   // const [defaultRating, setdefaultRating] = useState(0);
   // const [maxRating, setmaxRatting] = useState([1,2,3,4,5]);
+ 
+
 
   function handlechanges(text, input) {
     setInput((prev) => ({ ...prev, [input]: text }));
@@ -45,10 +48,14 @@ const AddReview = () => {
   function ratingCompleted(rating) {
     setInput((prev) => ({ ...prev, rating: rating }));
   }
-console.log(input);
+useEffect(()=>{
+  (async function fetch(){
+    await axios.post(`courses/${input}/reviews`, input)
+  })()
+},[])
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "padding"}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.root}
     >
       <SafeAreaView>
