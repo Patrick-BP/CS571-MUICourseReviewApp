@@ -45,10 +45,10 @@ const AddReview = () => {
   function ratingCompleted(rating) {
     setInput((prev) => ({ ...prev, rating: rating }));
   }
-
+console.log(input);
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? "padding" : "padding"}
       style={styles.root}
     >
       <SafeAreaView>
